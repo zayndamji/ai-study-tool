@@ -5,13 +5,19 @@ const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'],
 });
 
-async function main() {
+async function getResponse(content) {
   const completion = await openai.chat.completions.create({
     model: "gpt-4o-mini",
     messages: [
-      {"role": "user", "content": "write a haiku about ai"}
+      {"role": "user", "content": content}
     ]
   });
-  
-  console.log(completion.choices[0].message);
-} main();
+
+  return completion;
+}
+
+async function test() {
+  console.log(await getResponse('write me a haiku about ai'));
+}
+
+// test();

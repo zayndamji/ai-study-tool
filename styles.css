@@ -12,3 +12,10 @@ select, button {
   height: 32px;
   border-radius: 8px;
 }
+
+#unit-info {
+  max-width: 600px;
+  border: solid black 1px;
+  border-radius: 8px;
+  padding: 8px;
+}

@@ -5,6 +5,9 @@ const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY']
 });
 
+const showdown = require('showdown');
+const converter = new showdown.Converter();
+
 async function generateSAQ(unitNumber) {
   console.log('Starting SAQ request...');
 
@@ -14,7 +17,10 @@ async function generateSAQ(unitNumber) {
 
   console.log('SAQ generated.');
 
-  return completion;
+  const messageContent = completion.choices[0].message.content;
+  const htmlMessageContent = converter.makeHtml(messageContent);
+
+  return htmlMessageContent;
 }
 
 async function getResponse(content) {

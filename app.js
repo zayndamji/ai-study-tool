@@ -53,13 +53,13 @@ app.get('/generate/saq/unit/:unitNumber', async (req, res) => {
 
   console.log('Unit found.');
 
-  const completion = await generateSAQ(req.params.unitNumber);
+  const saq = await generateSAQ(req.params.unitNumber);
 
   console.log('SAQ Generated:');
-  console.log(completion.choices[0].message.content);
+  console.log(saq);
 
   res.send({
-    info: completion.choices[0].message.content
+    info: saq
   });
 });
 

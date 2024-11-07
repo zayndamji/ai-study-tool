@@ -1,3 +1,5 @@
+const { generateSAQ } = require('./ai');
+
 const fs = require('fs');
 const unitData = JSON.parse(fs.readFileSync('unitData.json'));
 
@@ -35,7 +37,7 @@ app.get('/unit/:unitNumber', (req, res) => {
   res.send(unitData[req.params.unitNumber]);
 });
 
-app.get('/generate/saq/unit/:unitNumber', (req, res) => {
+app.get('/generate/saq/unit/:unitNumber', async (req, res) => {
   console.log(req.params);
   if (!req.params.unitNumber) return;
 
@@ -51,7 +53,14 @@ app.get('/generate/saq/unit/:unitNumber', (req, res) => {
 
   console.log('Unit found.');
 
-  res.send(unitData[req.params.unitNumber]);
+  const completion = await generateSAQ(req.params.unitNumber);
+
+  console.log('SAQ Generated:');
+  console.log(completion.choices[0].message.content);
+
+  res.send({
+    info: completion.choices[0].message.content
+  });
 });
 
 app.listen(2244, () => {

@@ -13,7 +13,7 @@ select, button {
   border-radius: 8px;
 }
 
-#unit-info {
+#unit-info, #generated-content {
   max-width: 600px;
   border: solid black 1px;
   border-radius: 8px;

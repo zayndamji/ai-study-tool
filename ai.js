@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 const { OpenAI } = require('openai');
 
 const openai = new OpenAI({
@@ -47,6 +48,9 @@ involvement in the economy.`);
   console.log('SAQ generated.');
 
   const messageContent = completion.choices[0].message.content;
+
+  storeSAQ(messageContent, unitNumber);
+
   const htmlMessageContent = '<p><strong>SAQ:</strong></p>' + converter.makeHtml(messageContent);
 
   return htmlMessageContent;
@@ -65,6 +69,12 @@ async function getResponse(content) {
   console.log('Response generated.');
 
   return completion;
+}
+
+async function storeSAQ(saq, unitNumber) {
+  const saqs = JSON.parse(fs.readFileSync('saqs.json'));
+  saqs[unitNumber].push(saq.trim());
+  fs.writeFileSync('saqs.json', JSON.stringify(saqs, undefined, 2));
 }
 
 module.exports = {

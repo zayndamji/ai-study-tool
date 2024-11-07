@@ -3,6 +3,9 @@ const { generateSAQ } = require('./ai');
 const fs = require('fs');
 const unitData = JSON.parse(fs.readFileSync('unitData.json'));
 
+if (!fs.existsSync('saqs.json')) fs.writeFileSync('saqs.json', '');
+if (fs.readFileSync('saqs.json') == '') fs.writeFileSync('saqs.json', '{"1":[],"2":[],"3":[],"4":[],"5":[],"6":[],"7":[],"8":[],"9":[]}');
+
 const express = require('express');
 const app = express();
 

@@ -7,6 +7,8 @@ async function updateUnit() {
   const json = await res.json();
   console.log(json);
 
+  document.getElementById('unit-info').textContent = json.info;
+
   currentlyUpdatingUnit = false;
 }
 

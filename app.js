@@ -24,7 +24,7 @@ app.get('/unit/:unitNumber', (req, res) => {
     console.log('Unit not found.');
 
     res.send({
-      info: "Unit not found. Please try again later."
+      info: 'Unit not found. Please try again later.'
     });
 
     return;

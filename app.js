@@ -53,7 +53,7 @@ app.get('/generate/saq/unit/:unitNumber', async (req, res) => {
 
   console.log('Unit found.');
 
-  const saq = await generateSAQ(req.params.unitNumber);
+  const saq = await generateSAQ(req.params.unitNumber, unitData[req.params.unitNumber].time);
 
   console.log('SAQ Generated:');
   console.log(saq);
